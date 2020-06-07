@@ -6,6 +6,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,10 +25,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(flash());
 
 app.use(session({
   secret: 'my_blog', //convert to hash value for security concern
-  cookie:{maxAge:600000}, //deleted after this period
+  cookie:{maxAge:60*60*24*7*1000}, //deleted after 7days
   store:new MongoStore({url:'mongodb://localhost/my_blog'}),
   resave: false,
   saveUninitialized: true

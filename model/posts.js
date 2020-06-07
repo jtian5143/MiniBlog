@@ -4,13 +4,14 @@ var Schema = mongoose.Schema;
 
 mongoose.connect(config.mongodb);
 
+
 var PostSchema = new Schema({
     title:String,
-    author: String,
     article:String,
-    time: String
+    author: String,
+    publishTime: String
 });
 
 
-var Posts = mongoose.model('Post',PostSchema);
-module.exports = Posts;
+var Post = mongoose.model('Post',PostSchema);
+module.exports = Post;

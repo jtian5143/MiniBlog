@@ -1,14 +1,28 @@
 <%- include header%>
 
-<ul class="list-group">
-     <li class="list-group-item">
-         <h3><a href="#">Study building website</a></h3>
-         <p class="info">
-             <span>Author：Unknown</span>
-             <span>|</span>
-             <span>Date:2020-6-7</span>
-         </p>
-     </li>
-</ul>
+<%if(user){%>
+    <%posts.forEach(function(post) {%>
+        <%if(user.username == post.author){%>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h3><a href="#"><%=post.title%></a></h3>
+                <p>
+                    <span><a href="/delete">Delete</a></span>
+                </p>
+                <p class="info">
+                    <span>Author：<%=post.author%></span>
+                    <span>|</span>
+                    <span>Date:<%=time%></span>
+                </p>
+                <p>
+                    <span><%=post.article%></span>
+                </p>
+            </li>
+        </ul>
+        <%}%>
+    <%})%>
+<%} else {%>
+    <p>Please log in first</p>
+<%}%>
 
 <%- include footer%>
